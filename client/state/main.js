@@ -1,6 +1,6 @@
 const request = require('axios');
 
-let query = "privacy"
+let query = "[coming soon]"
 
 module.exports = function (state, emitter) {
   state.main = {
