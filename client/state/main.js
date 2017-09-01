@@ -13,14 +13,20 @@ module.exports = function (state, emitter) {
 
     var url = `${query}`;
 
-    request.get(url).then(result => {
-      state.main.data = result.data;
-      state.main.busy = false;
-      emitter.emit('render');
-    })
-    .catch(err => {
-      console.error(err);
-      state.main.busy = false;
-    });
+
+    // TEMPORARY:
+    state.main.data = url;
+    emitter.emit("render");
+
+    // request.get(url)
+    // .then(result => {
+    //   state.main.data = result.data;
+    //   state.main.busy = false;
+    //   emitter.emit('render');
+    // })
+    // .catch(err => {
+    //   console.error(err);
+    //   state.main.busy = false;
+    // });
   });
 };

@@ -4,9 +4,9 @@
   "scripts": {
     "dev": "parallelshell 'npm run dev-server' 'npm run dev-client'",
     "dev-server": "nodemon ./bin/www --ignore client --ignore public",
-    "dev-client": "watchify --fast --verbose ./client/index.js -o ./public/bundle.js",
+    "dev-client": "watchify --fast --verbose client/index.js -o public/bundle.js",
     "start": "node ./bin/www",
-    "build": "browserify ./client/index.js | uglifyjs > ./public/bundle.js"
+    "build": "browserify client/index.js | uglifyjs > public/bundle.js"
   },
   "browserify": {
     "transform": [
