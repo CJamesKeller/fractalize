@@ -1,7 +1,3 @@
-const $ = require('jquery')(window);
-global.jQuery = require('jquery');
-const bootstrap = require('bootstrap');
-
 const choo = require("choo")
 const app = choo()
 const main = require("./pages/main")
