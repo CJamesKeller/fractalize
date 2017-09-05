@@ -1,32 +1,29 @@
 const request = require('axios');
-
-let query = "[coming soon]"
+const API_KEY = require("../../config.json");
 
 module.exports = function (state, emitter) {
   state.main = {
-    data: null,
+    data: [],
     busy: false
   };
 
-  emitter.on('main:fetch', function () {
-    if (state.main.busy) return;
+  emitter.on("search", ( query ) => {
+      if (state.main.busy) return;
 
-    var url = `${query}`;
-
-
-    // TEMPORARY:
-    state.main.data = url;
-    emitter.emit("render");
-
-    // request.get(url)
-    // .then(result => {
-    //   state.main.data = result.data;
-    //   state.main.busy = false;
-    //   emitter.emit('render');
-    // })
-    // .catch(err => {
-    //   console.error(err);
-    //   state.main.busy = false;
-    // });
+      request.get(`https://api.propublica.org/congress/v1/bills/search.json?query=${query.query}`, {
+          headers: {
+              "X-API-KEY": API_KEY.key
+          }
+      })
+      .then(result => {
+          state.main.data = result.data.results[0].bills
+          state.main.busy = false;
+          emitter.emit("render")
+      })
+      .catch(err => {
+        console.error(err);
+        state.main.busy = false;
+      });
   });
+
 };
